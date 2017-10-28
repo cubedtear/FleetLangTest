@@ -13,10 +13,15 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
             - george-edison55-precise-backports
+            - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+            - sourceline: 'deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - g++-6
             - cmake-data
             - cmake
+            - llvm-6.0-dev
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
