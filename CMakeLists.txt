@@ -79,3 +79,9 @@ target_link_libraries(FleetLang antlr4-runtime)
 target_link_libraries(FleetLang LLVM)
 
 add_dependencies(Test FleetLang)
+
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+          message(STATUS "dir='${dir}'")
+  endforeach()
+
