@@ -75,8 +75,7 @@ include_directories(SYSTEM ${GEN_DIR})
 
 add_executable(FleetLang ${SOURCE_FILES} ${FleetLang_GRAMMAR_SOURCES})
 
-target_link_libraries(FleetLang antlr4-runtime)
-target_link_libraries(FleetLang ${LLVM_LIBRARIES})
+target_link_libraries(FleetLang antlr4-runtime ${LLVM_LIBRARIES})
 
 add_dependencies(Test FleetLang)
 
