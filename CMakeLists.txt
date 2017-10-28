@@ -18,7 +18,7 @@ if (UNIX)
 
 	find_package(LLVM REQUIRED CONFIG)
 	include_directories(SYSTEM ${LLVM_INCLUDE_DIR})
-
+    include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
 	link_directories(antlr4/lib)
 endif(UNIX)
 if (MSVC)
