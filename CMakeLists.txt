@@ -9,6 +9,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 
 add_subdirectory(test)
 add_subdirectory(grammar)
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
+
+
 
 if (UNIX)
 #	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold -rdynamic")
