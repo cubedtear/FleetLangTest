@@ -1,0 +1,12 @@
+void print(int i);
+void printd(double v);
+
+int main() {
+    double i = 10.0;
+    while (i < 2) {
+        print(5);
+        i = i+1.0;
+    }
+
+    return 0;
+}

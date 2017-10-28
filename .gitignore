@@ -1,0 +1,10 @@
+cmake-build-debug
+cmake-build-release
+gen
+.idea
+grammar/.FleetLang.g4.timestamp
+grammar/FleetLang.g4.exitcode
+test/output.o
+test/test
+test/test.o
+test/output
