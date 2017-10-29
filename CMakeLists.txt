@@ -12,16 +12,15 @@ add_subdirectory(grammar)
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 
-	find_package(LLVM REQUIRED CONFIG)
-    include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
-	link_directories(antlr4/lib)
-
-
 if (UNIX)
 #	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold -rdynamic")
 #	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fvisibility-inlines-hidden -ffunction-sections -fdata-sections")
 #	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=date-time -Wall -W -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wno-long-long -Wno-uninitialized -Wdelete-non-virtual-dtor -Wno-comment")
 #	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS")
+
+    find_package(LLVM REQUIRED CONFIG)
+    include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+    link_directories(antlr4/lib)
 
 endif(UNIX)
 if (MSVC)
@@ -78,7 +77,7 @@ include_directories(SYSTEM ${GEN_DIR})
 
 add_executable(FleetLang ${SOURCE_FILES} ${FleetLang_GRAMMAR_SOURCES})
 
-target_link_libraries(FleetLang antlr4-runtime /usr/lib/llvm-6.0/lib/libLLVM-6.0.so)
+target_link_libraries(FleetLang antlr4-runtime ${LLVM_LIBRARIES})
 
 add_dependencies(Test FleetLang)
 
