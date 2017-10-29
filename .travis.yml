@@ -27,7 +27,7 @@ before_install:
   - llvm-config-6.0 --ldflags --libs
 
 script:
-  - cd build && ../cmake-3.4.3-Linux-x86_64/bin/cmake .. && make
+  - cd build && cmake .. && make
 
 install:
   - mkdir build
