@@ -82,7 +82,7 @@ target_link_libraries(FleetLang antlr4-runtime ${LLVM_LIBRARIES})
 add_dependencies(Test FleetLang)
 
 
-message(STATUS "Link: ${LLVM_LIBRARIES}"
+message(STATUS "Link: ${LLVM_LIBRARIES}")
 
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
