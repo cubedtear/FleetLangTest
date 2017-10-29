@@ -19,17 +19,19 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xvf cmake-3.4.3-Linux-x86_64.tar.gz; fi
   - git clone --depth 1 https://github.com/llvm-mirror/llvm.git
   - cd llvm
-  - mkdir -p build && cd build
-  - cmake .. -DLLVM_TARGETS_TO_BUILD:STRING="X86" -DLLVM_INCLUDE_TOOLS:BOOL=false -DLLVM_INCLUDE_EXAMPLES:BOOL=false -DLLVM_INCLUDE_TESTS:BOOL=false
+  - mkdir -p build
+  - cd build
+  - ../../cmake-3.4.3-Linux-x86_64/bin/cmake .. -DLLVM_TARGETS_TO_BUILD:STRING="X86" -DLLVM_INCLUDE_TOOLS:BOOL=false -DLLVM_INCLUDE_EXAMPLES:BOOL=false -DLLVM_INCLUDE_TESTS:BOOL=false
   - make -j4
   - sudo make install
   - cd ../..
   - llvm-config-6.0 --ldflags --libs
 
 script:
-  - cd build && cmake .. && make
+  - cd build && ../cmake-3.4.3-Linux-x86_64/bin/cmake .. && make
 
 install:
   - mkdir build
