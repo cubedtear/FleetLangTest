@@ -1,32 +1,34 @@
 language: cpp
 compiler: gcc
 dist: trusty
-sudo: required
 python: "3.5"
 jdk: openjdk8
 
 matrix:
   include:
     - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+            - sourceline: 'deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - g++-6
+            - llvm-6.0-dev
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
-  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-  - echo "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty main" | sudo tee -a /etc/apt/sources.list
-  - echo "deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty main"| sudo tee -a /etc/apt/sources.list
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt update
-  - sudo apt install -y  llvm-6.0-dev g++-6
   - eval "${MATRIX_EVAL}"
-  - tree -dl /usr/lib/llvm*
-  - llvm-config-6.0 --ldflags --libs
-
-script:
-  - cd build && cmake .. && make
 
 install:
   - mkdir build
+
+script:
+  - cd build && cmake .. && make
 
 after_success:
   - echo "Yay! Your code compiled and runs fine."
