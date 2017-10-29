@@ -25,6 +25,7 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
   - llvm-config-6.0 --ldflags --libs
+  - tree -dl /usr/lib/llvm*
 
 script:
   - cd build && cmake .. && make
