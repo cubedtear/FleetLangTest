@@ -17,7 +17,7 @@ if (UNIX)
         #   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS")
 
         find_package(LLVM REQUIRED CONFIG)
-        include_directories(SYSTEM ${LLVM_INCLUDE_DIR})
+        include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
 
         link_directories(antlr4/lib)
 endif(UNIX)
