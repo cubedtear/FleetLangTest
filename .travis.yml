@@ -18,23 +18,24 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
-    - eval "${MATRIX_EVAL}"
-    - llvm-config-6.0 --ldflags --libs
-    - git clone --depth 1 https://github.com/llvm-mirror/llvm.git
-    - cd llvm
-    - mkdir -p build && cd build
-    - cmake .. -DLLVM_TARGETS_TO_BUILD:STRING="X86" -DLLVM_INCLUDE_TOOLS:BOOL=false -DLLVM_INCLUDE_EXAMPLES:BOOL=false -DLLVM_INCLUDE_TESTS:BOOL=false
-    - make -j4
-    - sudo make install
-    - cd ../..
-    - llvm-config-6.0 --ldflags --libs
+  - eval "${MATRIX_EVAL}"
+  - git clone --depth 1 https://github.com/llvm-mirror/llvm.git
+  - cd llvm
+  - mkdir -p build && cd build
+  - cmake .. -DLLVM_TARGETS_TO_BUILD:STRING="X86" -DLLVM_INCLUDE_TOOLS:BOOL=false -DLLVM_INCLUDE_EXAMPLES:BOOL=false -DLLVM_INCLUDE_TESTS:BOOL=false
+  - make -j4
+  - sudo make install
+  - cd ../..
+  - llvm-config-6.0 --ldflags --libs
 
-script: cd build && cmake .. && make
+script:
+  - cd build && cmake .. && make
+
 install:
-          - mkdir build
+  - mkdir build
 
 after_success:
-          - echo "Yay! Your code compiled and runs fine."
+  - echo "Yay! Your code compiled and runs fine."
 
 after_failure:
-          - echo "Uh-oh - something is wrong with your code!"
+  - echo "Uh-oh - something is wrong with your code!"
