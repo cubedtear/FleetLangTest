@@ -12,6 +12,10 @@ add_subdirectory(grammar)
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 
+	find_package(LLVM REQUIRED CONFIG)
+    include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+	link_directories(antlr4/lib)
+
 
 if (UNIX)
 #	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold -rdynamic")
@@ -19,9 +23,6 @@ if (UNIX)
 #	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=date-time -Wall -W -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wno-long-long -Wno-uninitialized -Wdelete-non-virtual-dtor -Wno-comment")
 #	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS")
 
-	find_package(LLVM REQUIRED CONFIG)
-    include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
-	link_directories(antlr4/lib)
 endif(UNIX)
 if (MSVC)
     message(FATAL_ERROR "Windows target is not ready to use yet")
