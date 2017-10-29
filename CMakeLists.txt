@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1.3)
 project(FleetLang)
 
-#set(CMAKE_VERBOSE_MAKEFILE TRUE)
+set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -16,10 +16,16 @@ if (UNIX)
         #   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=date-time -Wall -W -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wno-long-long -Wno-uninitialized -Wdelete-non-virtual-dtor -Wno-comment")
         #   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS")
 
-        find_package(LLVM REQUIRED CONFIG)
-        include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+    find_package(LLVM REQUIRED CONFIG)
+    if (NOT ${LLVM_FOUND})
+        message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+        message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 
-        link_directories(antlr4/lib)
+        include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+    else()
+        message(FATAL_ERROR "LLVM Not found!")
+    endif()
+    link_directories(antlr4/lib)
 endif(UNIX)
 if (MSVC)
         message(FATAL_ERROR "Windows target is not ready to use yet")
@@ -77,6 +83,6 @@ add_executable(FleetLang ${SOURCE_FILES} ${FleetLang_GRAMMAR_SOURCES})
 
 target_link_libraries(FleetLang antlr4-runtime ${LLVM_LIBRARIES})
 
-message(status ${LLVM_LIBRARIES})
+message(STATUS "libs: " ${LLVM_LIBRARIES})
 
 add_dependencies(Test FleetLang)
