@@ -22,7 +22,6 @@ if (UNIX)
 	find_package(LLVM REQUIRED CONFIG)
     include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
 	link_directories(antlr4/lib)
-    link_directories(${LLVM_LIBRARY_DIRS})
 endif(UNIX)
 if (MSVC)
     message(FATAL_ERROR "Windows target is not ready to use yet")
@@ -81,6 +80,9 @@ add_executable(FleetLang ${SOURCE_FILES} ${FleetLang_GRAMMAR_SOURCES})
 target_link_libraries(FleetLang antlr4-runtime ${LLVM_LIBRARIES})
 
 add_dependencies(Test FleetLang)
+
+
+message(STATUS "Link: ${LLVM_LIBRARIES}"
 
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
