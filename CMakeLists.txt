@@ -15,7 +15,6 @@ add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 	find_package(LLVM REQUIRED CONFIG)
     include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
 	link_directories(antlr4/lib)
-    link_directories(/usr/lib/llvm-6.0/lib)
 
 
 if (UNIX)
@@ -79,7 +78,7 @@ include_directories(SYSTEM ${GEN_DIR})
 
 add_executable(FleetLang ${SOURCE_FILES} ${FleetLang_GRAMMAR_SOURCES})
 
-target_link_libraries(FleetLang antlr4-runtime LLVM-6.0)
+target_link_libraries(FleetLang antlr4-runtime /usr/lib/llvm-6.0/lib/libLLVM-6.0.so)
 
 add_dependencies(Test FleetLang)
 
