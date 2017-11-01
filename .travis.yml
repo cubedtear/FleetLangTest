@@ -18,6 +18,7 @@ matrix:
           packages:
             - g++-6
             - llvm-6.0-dev
+            - uuid-dev
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
