@@ -24,7 +24,7 @@ matrix:
 
 cache:
   directories:
-    - antlr4
+    - build/antlr4
 
 before_install:
   - eval "${MATRIX_EVAL}"
