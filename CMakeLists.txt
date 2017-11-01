@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1.3)
 project(FleetLang)
 
-set(CMAKE_VERBOSE_MAKEFILE TRUE)
+# set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -9,6 +9,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 
 add_subdirectory(test)
 add_subdirectory(grammar)
+add_subdirectory(antlr4)
+include_directories(antlr4/runtime/src)
 
 if (UNIX)
         #   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold -rdynamic")
@@ -24,8 +26,12 @@ if (UNIX)
     else()
         message(FATAL_ERROR "LLVM Not found!")
     endif()
-    link_directories(antlr4/lib)
 endif(UNIX)
+
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
 
 if (MSVC)
         message(FATAL_ERROR "Windows target is not ready to use yet")
@@ -42,8 +48,6 @@ if (MSVC)
         set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Visual Studio condiguration files" FORCE)
 
 endif(MSVC)
-
-include_directories(SYSTEM antlr4/include)
 
 
 set(SOURCE_FILES
@@ -81,8 +85,7 @@ include_directories(SYSTEM ${GEN_DIR})
 
 add_executable(FleetLang ${SOURCE_FILES} ${FleetLang_GRAMMAR_SOURCES})
 
-target_link_libraries(FleetLang antlr4-runtime ${LLVM_LIBRARIES})
-
-message(STATUS "libs: " ${LLVM_LIBRARIES})
+target_link_libraries(FleetLang antlr4_static LLVM)
 
 add_dependencies(Test FleetLang)
+add_dependencies(FleetLang antlr4_static)

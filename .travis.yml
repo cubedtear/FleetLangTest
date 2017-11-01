@@ -18,19 +18,17 @@ matrix:
           packages:
             - g++-6
             - llvm-6.0-dev
-            - tree
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  - tree -dl /usr/lib/llvm*
 
 install:
   - mkdir build
 
 script:
-  - cd build && cmake .. && make
+  - cd build && cmake .. && make -j4 FleetLang
 
 after_success:
   - echo "Yay! Your code compiled and runs fine."
