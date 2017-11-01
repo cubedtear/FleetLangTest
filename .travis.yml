@@ -30,7 +30,7 @@ before_install:
   - eval "${MATRIX_EVAL}"
 
 install:
-  - mkdir build
+  - mkdir -p build
 
 script:
   - cd build && cmake .. && make -j4 FleetLang
