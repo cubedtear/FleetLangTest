@@ -10,7 +10,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 add_subdirectory(test)
 add_subdirectory(grammar)
 add_subdirectory(antlr4)
-include_directories(antlr4/runtime/src)
+include_directories(SYSTEM antlr4/runtime/src)
 
 if (UNIX)
         #   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold -rdynamic")
