@@ -28,6 +28,7 @@ cache:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - find build/antlr4 -type f  -exec touch {} +
 
 install:
   - mkdir -p build
