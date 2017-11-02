@@ -101,6 +101,10 @@ install(TARGETS antlr4_shared
 install(TARGETS antlr4_static
         ARCHIVE DESTINATION lib)
 
+set(ANTLR4_INCLUDE_DIR "${CMAKE_BINARY_DIR}/antlr4/include" CACHE PATH "Path to the Antlr4 include files" FORCE)
+
+file(COPY "${PROJECT_SOURCE_DIR}/runtime/src/" DESTINATION "${ANTLR4_INCLUDE_DIR}" FILES_MATCHING PATTERN "*.h")
+
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/runtime/src/" 
         DESTINATION "include/antlr4-runtime"
         COMPONENT dev 

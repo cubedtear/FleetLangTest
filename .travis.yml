@@ -13,8 +13,6 @@ matrix:
             - ubuntu-toolchain-r-test
             - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-            - sourceline: 'deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty main'
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - g++-6
             - llvm-6.0-dev
@@ -22,13 +20,8 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
-cache:
-  directories:
-    - build/antlr4
-
 before_install:
   - eval "${MATRIX_EVAL}"
-  - find build/antlr4 -type f  -exec touch {} +
 
 install:
   - mkdir -p build
