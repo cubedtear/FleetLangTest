@@ -6,3 +6,4 @@ FleetLang:
     - cd build
     - cmake ..
     - make FleetLang -j4
+
