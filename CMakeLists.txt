@@ -89,3 +89,4 @@ target_link_libraries(FleetLang antlr4_static LLVM)
 
 add_dependencies(Test FleetLang)
 add_dependencies(FleetLang antlr4_static)
+
